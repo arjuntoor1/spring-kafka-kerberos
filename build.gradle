@@ -1,0 +1,44 @@
+
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'org.springframework.boot' version '2.3.0.RELEASE'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+repositories {
+    mavenLocal()
+    maven {
+        url = 'http://repo.maven.apache.org/maven2'
+    }
+}
+
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter'
+    compile 'org.springframework.kafka:spring-kafka'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.11.0'
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile 'org.springframework.kafka:spring-kafka-test'
+    compileOnly 'org.projectlombok:lombok:1.18.2'
+}
+
+group = 'com.panaseer'
+version = '1.0-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+bootJar {
+    mainClassName = 'com.panaseer.demo.Application'
+}
