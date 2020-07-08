@@ -20,7 +20,6 @@ public class Producer {
     }
 
     public void publishMessage() {
-        LOG.info("KAFKA CONFIG: " + kafkaTemplate.toString());
         IntStream.range(1, 20).forEach(this::send);
     }
 
